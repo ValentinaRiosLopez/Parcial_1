@@ -8,6 +8,13 @@
 #define LIBRE 1
 #define OCUPADO 0
 
+/**
+ * PONE TODAS LAS POSICIONES DEL ARRAY EN 0
+ * @param list
+ * @param tam
+ * @return 0 si tiene exito
+ */
+
 int inicializarArray(sVivienda* list, int tam)
 {
 	int retorno =-1;
@@ -25,6 +32,13 @@ int inicializarArray(sVivienda* list, int tam)
 		return retorno;
 }
 
+/**
+ * BUSCA ESPACIO PARA CARGAR DATOS
+ * @param list
+ * @param tam
+ * @param lugar
+ * @return 0 si tiene exito
+ */
 int buscarEspacio(sVivienda* list, int tam, int* lugar)
 {
 	int retorno = -1;
@@ -46,7 +60,13 @@ int buscarEspacio(sVivienda* list, int tam, int* lugar)
 	return retorno;
 }
 
-
+/**
+ * PIDE AL USUARIO LOS DATOS DE UNA VIVIENDA Y LOS CARGA AL SISTEMA
+ * @param list
+ * @param tam
+ * @param id
+ * @return 0 si tiene exito
+ */
 int addVivienda(sVivienda* list, int tam, int id)
 {
 	int retorno =-1;
@@ -78,7 +98,7 @@ int addVivienda(sVivienda* list, int tam, int id)
 													 "ERROR Ingrese una opcion valida: ",1,4);
 			fflush(stdin);
 
-			legajo = utn_getNumero("Censistas:\n"
+			legajo = utn_getNumero("\nCensistas:\n"
 								"1)Nombre: Ana, Legajo: 100\n"
 								"2)Nombre: Juan, Legajo: 101\n"
 								"3)Nombre: Sol, Legajo: 102\n"
@@ -94,14 +114,17 @@ int addVivienda(sVivienda* list, int tam, int id)
 		}
 		else
 		{
-			printf("No hay espacio para agregar mas viviendas...\n");
+			printf("No hay espacio para agregar mas viviendas...\n\n");
 		}
 	}
 
 
 	return retorno;
 }
-
+/**
+ * MUESTRA LOS DATOS DE UNA VIVIENDA POR CONSOLA
+ * @param list
+ */
 void mostrarVivienda(sVivienda list)
 {
 
@@ -129,7 +152,11 @@ void mostrarVivienda(sVivienda list)
 	}
 	printf("Legajo del censista: %d\n", list.legajoCensista.legajoCensista);
 }
-
+/**
+ * MUESTRA LOS DATOS DE TODAS LAS VIVIENDAS POR CONSOLA
+ * @param list
+ * @param tam
+ */
 void mostrarViviendas(sVivienda* list, int tam)
 {
 	int i;
@@ -145,6 +172,12 @@ void mostrarViviendas(sVivienda* list, int tam)
 	}
 }
 
+/**
+ * MODIFICA LOS DATOS DE UNA VIVIENDA Y LOS CARGA
+ * @param list
+ * @param tam
+ * @return 0 si tiene exito
+ */
 int modificarVivienda(sVivienda* list, int tam)
 {
 	int retorno = -1;
@@ -162,10 +195,10 @@ int modificarVivienda(sVivienda* list, int tam)
 
 		if(indice != -1)
 		{
-			printf("Vivienda a modificar:\n");
+			printf("Vivienda a modificar:\n\n");
 			mostrarVivienda(list[indice]);
 			do{
-				opcion = utn_getNumero("---MENU DE MODIFICACION---\n"
+				opcion = utn_getNumero("\n---MENU DE MODIFICACION---\n"
 									  "1)Modificar calle.\n"
 									  "2)Modificar cantidad de personas.\n"
 									  "3)Modificar cantidad de habitaciones.\n"
@@ -218,7 +251,7 @@ int modificarVivienda(sVivienda* list, int tam)
 		}
 		else
 		{
-			printf("No se ingreso una vivienda con ese ID.");
+			printf("No se ingreso una vivienda con ese ID.\n\n");
 		}
 	}
 
@@ -226,7 +259,13 @@ int modificarVivienda(sVivienda* list, int tam)
 
 }
 
-
+/**
+ * BUSCA LA POSICION DE UNA VIVIENDA SOLICITADA POR EL USUARIO MEDIANTE UN ID
+ * @param list
+ * @param tam
+ * @param id
+ * @return la posicion de la vivienda
+ */
 
 int findById(sVivienda* list, int tam, int id)
 {
@@ -244,6 +283,14 @@ int findById(sVivienda* list, int tam, int id)
 	return indice;
 }
 
+/**
+ * HACE UNA BAJA LOGICA PARA PODER ELIMINAR UNA VIVIENDA
+ * @param list
+ * @param tam
+ * @param id
+ * @return 0 si tiene exito
+ */
+
 int removeVivienda(sVivienda* list, int tam, int id)
 {
 	int retorno = -1;
@@ -259,18 +306,18 @@ int removeVivienda(sVivienda* list, int tam, int id)
 			{
 				printf("Vivienda a eliminar: \n");
 				mostrarVivienda(list[indice]);
-				opcion = utn_getChar("Seguro que desea eliminar esta vivienda? (s/n):",
-										"ERROR ingrese 's' para si o 'n' para no: ",'n','s');
+				opcion = utn_getRespuesta("Seguro que desea eliminar esta vivienda? (s/n):",
+										"ERROR ingrese 's' para si o 'n' para no: ");
 				if(opcion=='s')
 				{
 					list[indice].isEmpty = LIBRE;
-					printf("Vivienda eliminada exitosamente...");
+					printf("Vivienda eliminada exitosamente...\n\n");
 					retorno = 0;
 				}
 			}
 			else
 			{
-				printf("ERROR No existe ninguna vivienda con ese ID");
+				printf("ERROR No existe ninguna vivienda con ese ID\n\n");
 			}
 
 
@@ -279,11 +326,18 @@ int removeVivienda(sVivienda* list, int tam, int id)
 		return retorno;
 }
 
+/**
+ * ORDENA LOS DATOS ALFABETICAMENTE MEDIANTE EL NOMBRE DE LA CALLE
+ * Y SI SON IGUALES ORDENA DE MAYOR A MENOR POR CANTIDAD DE HABTANTES
+ * @param list
+ * @param tam
+ * @return 0 si tiene exito
+ */
 int ordenarViviendas(sVivienda* list, int tam)
 {
 	int i;
 	int flagSwap;
-	int contador = 0;
+	int retorno = -1;
 	sVivienda auxVivienda;
 	int nuevoLimite;
 
@@ -294,7 +348,6 @@ int ordenarViviendas(sVivienda* list, int tam)
 			flagSwap = 0;
 			for(i=0; i<nuevoLimite; i++)
 			{
-				contador++;
 				if(strcmp(list[i].calle,list[i+1].calle)>0 || (strcmp(list[i].calle,list[i+1].calle)== 0
 						&& list[i].cantidadDePersonas < list[i+1].cantidadDePersonas))
 				{
@@ -306,7 +359,8 @@ int ordenarViviendas(sVivienda* list, int tam)
 			}
 			nuevoLimite--;
 		}while(flagSwap);
+		retorno = 0;
 	}
 
-	return contador;
+	return retorno;
 }

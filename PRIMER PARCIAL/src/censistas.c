@@ -5,12 +5,20 @@
 #include "censistas.h"
 #include "funcionesUTN.h"
 
-
+/**
+ * MUESTRA LOS DATOS DE UN CENSISTA POR COSOLA
+ * @param list
+ */
 void mostrarCensista(sCensista list)
 {
-	printf("ID: %d Nombre: %s Edad:%d Telefono: %li\n", list.legajoCensista, list.nombre, list.edad, list.telefono);
+	printf("ID: %d NOMBRE: %s EDAD:%d TELEFONO: %li\n", list.legajoCensista, list.nombre, list.edad, list.telefono);
 }
 
+/**
+ * MUESTRA LOS DATOS DE TODOS LOS CENSISTAS POR CONSOLA
+ * @param list
+ * @param tam
+ */
 void mostrarCensistas(sCensista* list, int tam)
 {
 	int i;

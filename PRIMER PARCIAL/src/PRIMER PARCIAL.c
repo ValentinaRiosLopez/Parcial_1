@@ -1,12 +1,17 @@
 
-
+/*
+ * Rios Lopez, Valentina
+ * 1D
+ * LABORATORIO DE PROGRAMACION
+ * PRIMER PARCIAL 2022
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "funcionesUTN.h"
 #include "viviendas.h"
 #include "censistas.h"
-#define TAM 5
+#define TAM 100
 
 
 
@@ -23,11 +28,12 @@ int main(void) {
 
 	inicializarArray(auxVivienda, TAM);
 
-	separadorMenu();
 
 
-	separadorMenu();
+
+
 	do{
+		separadorMenu();
 		opcion = utn_getNumero("\n==========MENU==========\n"
 								  "1)ALTA VIVIENDA.\n"
 								  "2)MODIFICAR VIVIENDA.\n"
@@ -42,31 +48,33 @@ int main(void) {
 			if(addVivienda(auxVivienda, TAM, idVivienda)==0)
 			{
 				idVivienda++;
-				printf("Vivienda agregada exitosamente...\n");
+				printf("Vivienda agregada exitosamente...\n\n");
 
 
 			}
 			else
 			{
-				printf("ERROR No se pudo agregar la vivienda...\n");
+				printf("ERROR No se pudo agregar la vivienda...\n\n");
 			}
+			system("pause");
 			break;
 		case 2:
 			if(idVivienda != 20000)
 			{
 				if(modificarVivienda(auxVivienda, TAM)== 0)
 				{
-					printf("Vivienda modificada con exito...");
+					printf("Vivienda modificada con exito...\n\n");
 				}
 				else
 				{
-					printf("ERROR No se pudo modificar la vivienda...");
+					printf("No se pudo modificar la vivienda...\n\n");
 				}
 			}
 			else
 			{
-				printf("ERROR Primero debe ingresar una vivienda.");
+				printf("ERROR Primero debe ingresar una vivienda.\n\n");
 			}
+			system("pause");
 			break;
 		case 3:
 			if(idVivienda != 20000)
@@ -78,8 +86,9 @@ int main(void) {
 			}
 			else
 			{
-				printf("ERROR Primero debe ingresar una vivienda.");
+				printf("ERROR Primero debe ingresar una vivienda.\n\n");
 			}
+			system("pause");
 			break;
 		case 4:
 			if(idVivienda != 20000)
@@ -87,12 +96,13 @@ int main(void) {
 				printf("---INICIO DE LISTADO---\n");
 				ordenarViviendas(auxVivienda, TAM);
 				mostrarViviendas(auxVivienda, TAM);
-				printf("----FIN DEL LISTADO----\n");
+				printf("----FIN DEL LISTADO----\n\n");
 			}
 			else
 			{
-				printf("ERROR Primero debe ingresar una vivienda.");
+				printf("ERROR Primero debe ingresar una vivienda.\n\n");
 			}
+			system("pause");
 			break;
 		case 5:
 
@@ -100,12 +110,17 @@ int main(void) {
 
 			mostrarCensistas(auxCensista, 3);
 
-
+			system("pause");
 			break;
 
 		}
 
 	}while(opcion !=6);
+
+	if(opcion == 6)
+	{
+		printf("\n====FIN DEL PROGRAMA====\n");
+	}
 
 	return EXIT_SUCCESS;
 }

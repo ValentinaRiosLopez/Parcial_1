@@ -34,7 +34,14 @@ int utn_getNumero(char* mensaje, char* mensajeError, int minimo, int maximo)
 	return numeroIngresado;
 }
 
-char utn_getChar(char* mensaje, char* mensajeError, char minimo, char maximo)
+
+/**
+ * PREGUNTA AL USUARIO POR UNA RESPUESTA DE SI O NO Y LA RETORNA
+ * @param mensaje
+ * @param mensajeError
+ * @return caracter equivalente a la respuesta
+ */
+char utn_getRespuesta(char* mensaje, char* mensajeError)
 {
 	char respuesta;
 
@@ -42,12 +49,13 @@ char utn_getChar(char* mensaje, char* mensajeError, char minimo, char maximo)
 	{
 
 		printf("%s", mensaje);
+		fflush(stdin);
 		scanf("%c", &respuesta);
 		respuesta = tolower(respuesta);
-		while(respuesta < minimo && respuesta > maximo)
+		while(respuesta != 's' && respuesta != 'n')
 		{
 			printf("%s", mensajeError);
-
+			fflush(stdin);
 			scanf("%c", &respuesta);
 			respuesta = tolower(respuesta);
 		}
@@ -194,7 +202,16 @@ int utn_getString(char* cadena, char* mensaje, char* mensajeError, int min, int 
 	return retorno;
 }
 
-
+/**
+ * PIDE AL USUARIO UN STRING Y VALIDA QUE SOLO CONTENGA LETRAS Y ESPACIOS
+ *
+ * @param cadena
+ * @param mensaje
+ * @param mensajeError
+ * @param min
+ * @param max
+ * @return 0
+ */
 int utn_getStringSoloLetras(char* cadena, char* mensaje, char* mensajeError, int min, int max)
 {
 	int retorno = -1;
@@ -219,7 +236,11 @@ int utn_getStringSoloLetras(char* cadena, char* mensaje, char* mensajeError, int
 	return retorno;
 }
 
-
+/**
+ * VALIDA QUE UN STRING SOLO TENGA LETRAS Y ESPACIOS
+ * @param cadena
+ * @return 1 si tiene exito
+ */
 int utn_validarCadena(char* cadena)
 {
 	int retorno= 0;
@@ -238,7 +259,10 @@ int utn_validarCadena(char* cadena)
 
 }
 
-
+/**
+ * CONVIERTE EL STRING COMPLETO A MAYUSCULAAS
+ * @param cadena
+ */
 void utn_convertirUpper(char* cadena)
 {
 	int i=0;
@@ -249,7 +273,10 @@ void utn_convertirUpper(char* cadena)
 		i++;
 	}
 }
-
+/**
+ * CONVIERTE LA PRIMERA LETRA DE CADA PALABRA A MAYUSCULA Y EL RESTO A MINUSCULA
+ * @param cadena
+ */
 void utn_convertirFirstUpper(char* cadena)
 {
 	int i = 1;
@@ -270,11 +297,17 @@ void utn_convertirFirstUpper(char* cadena)
 
 }
 
+/**
+ * FUNCION GRAFICA PARA ORDENAR EL MENU
+ */
+
 void separadorMenu()
 {
 	printf("\n*~~~~~~~~~~~~~~~~~~~~~~*\n");
 }
-
+/**
+ * FUNCION GRAFICA QUE HACE ESPACIO EN EL MENU
+ */
 void limpiarConsola()
 {
 	printf("\n\n\n\n");
